@@ -25,12 +25,13 @@ export default function Map() {
     () => ({
       mapId: "b181cac70f27f5e6",
       disableDefaultUI: true,
-      clickableIcons: false,
     }),
     []
   );
   const onLoad = useCallback((map) => (mapRef.current = map), []);
-  const houses = useMemo(() => generateHouses(center), [center]);
+  const houses = useMemo(function(){
+    if(office) return generateHouses(office);
+  },[office]);
 
   const fetchDirections = (house: LatLngLiteral) => {
     if (!office) return;
@@ -38,8 +39,8 @@ export default function Map() {
     const service = new google.maps.DirectionsService();
     service.route(
       {
-        origin: house,
-        destination: office,
+        origin: office,
+        destination: house,
         travelMode: google.maps.TravelMode.DRIVING,
       },
       (result, status) => {
@@ -53,14 +54,14 @@ export default function Map() {
   return (
     <div className="container">
       <div className="controls">
-        <h1>Commute?</h1>
+        <h1>MapIt</h1>
         <Places
           setOffice={(position) => {
             setOffice(position);
             mapRef.current?.panTo(position);
           }}
         />
-        {!office && <p>Enter the address of your office.</p>}
+        {/* {!office && <p>Enter your location</p>} */}
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
       </div>
       <div className="map">
@@ -91,20 +92,19 @@ export default function Map() {
                 icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
               />
 
-              <MarkerClusterer>
-                {(clusterer) =>
+              
+                {
                   houses.map((house) => (
                     <Marker
                       key={house.lat}
                       position={house}
-                      clusterer={clusterer}
                       onClick={() => {
                         fetchDirections(house);
                       }}
                     />
                   ))
                 }
-              </MarkerClusterer>
+              
 
               <Circle center={office} radius={15000} options={closeOptions} />
               <Circle center={office} radius={30000} options={middleOptions} />
