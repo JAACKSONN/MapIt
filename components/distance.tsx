@@ -31,35 +31,40 @@ export default function Distance({ leg }: DistanceProps) {
     <div>
       <p>
         This location is <span className="highlight">{leg.distance.text}</span> or {" "}
-        <span className="highlight">{leg.duration.text}</span> away.
+        <span className="highlight">{leg.duration.text}</span> away when driving.
       </p>
 
       <p>
-        A standard taxi in this city will cost you {" "}
+        🚕   will cost you {" "}
         <span className="highlight">
           ${new Intl.NumberFormat().format(taxiCost)}
         </span>
       </p>
-      <p>
-        UberX will cost you {" "}
-        <span className="highlight">
-          ${new Intl.NumberFormat().format(uberCost)}
-        </span>
-      </p>
-      <p>
-        Lyft will cost you {" "}
-        <span className="highlight">
-          ${new Intl.NumberFormat().format(lyftCost)}
-        </span>
-      </p>
-      <p>
-        A Spin scooter will cost you {" "}
-        <span className="highlight">
-          ${new Intl.NumberFormat().format(spinCost)}
-        </span>
-        , but will take <span className="highlight">{spinTime} minutes </span> instead
-      </p>
-
-    </div>
+      <div>
+        <img src = "./uber.png" alt = 'UberX' className = 'uber_logo'/>
+        <p>
+          will cost you {" "}
+          <span className="highlight">
+            ${new Intl.NumberFormat().format(uberCost)}
+          </span>
+        </p>
+      </div>
+      <div>
+          <img src = './lyft.png' alt = 'Lyft' className = 'lyft_logo'/>
+          <p>
+            will cost you {" "}
+          <span className="highlight">
+            ${new Intl.NumberFormat().format(lyftCost)}
+          </span>
+        </p>
+      </div>
+        <p>
+          <span className = 'spin_logo'>SPIN</span> scooters will cost you {" "}
+          <span className="highlight">
+            ${new Intl.NumberFormat().format(spinCost)}
+          </span>
+          , but will take <span className="highlight">{spinTime} minutes </span> instead
+        </p>
+      </div>
   );
 }

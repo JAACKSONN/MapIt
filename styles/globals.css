@@ -46,7 +46,38 @@ a {
   font-weight: bold;
 }
 
+.uber_logo {
+  width: 50px;
+  height: 30px;
+  padding: 0%;
+  border-radius: 50%;
+  float: left;
+}
+
+.lyft_logo {
+  width: 50px;
+  height: 33px;
+  padding: 0%;
+  border-radius: 50%;
+  float: left;
+}
+
+.spin_logo {
+  color: orange;
+  font-family: Impact;
+  font-size: 20px;
+}
+
 .combobox-input {
   width: 100%;
   padding: 0.5rem;
+}
+
+.align {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  text-align: justify;
 }
